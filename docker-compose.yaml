@@ -1,0 +1,33 @@
+﻿#version: '3'
+
+services:
+  api:
+    build: ./api
+    container_name: node-api
+    command: npm run start
+    restart: always
+    ports:
+      - ${API_PORT}:${API_PORT}
+    environment:
+      - MONGO_URL
+      - API_PORT
+    volumes:
+    - ${MOUNT_HTTP_FOLDER}:/www
+    depends_on:
+      - ${MONGO_CONTAINER}
+
+  # имя контейнера нужно занести в .env
+  api-db:
+    image: mongo:5.0.20
+    container_name: ${MONGO_CONTAINER}
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+    restart: always
+    volumes:
+      - ${MOUNT_MONGO_FOLDER}:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+      - MONGO_INITDB_DATABASE
+
+
