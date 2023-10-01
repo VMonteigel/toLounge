@@ -1,0 +1,11 @@
+﻿{
+    "verbose": true,
+    "watch": ["src"],
+    "ignore": [
+        ".dockerignore",
+        "Dockerfile",
+        "www/**/*"
+      ],
+    "delay": "3",
+    "exec": "node src/index.js"
+  }

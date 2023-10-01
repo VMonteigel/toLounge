@@ -1,11 +1,17 @@
 ﻿services:
   api:
     command: npm run dev
-
+    volumes:
+      - ${MOUNT_API_FOLDER}:/usr/src/app/src
+    restart: "no"  
+  
+  api-db:
+    restart: "no" 
+  
   mongo-exp:
     image: mongo-express:0.54.0
     container_name: mongo-e
-    restart: always
+    restart: "no"
     ports:
       - ${MONGO_EXP_PORT}:${MONGO_EXP_PORT}
     depends_on:
